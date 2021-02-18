@@ -10,8 +10,8 @@ python command-line application
 usage: python_exe cheSPI4c.py ID [-p] [option] > logfile &
 if option is 2: will plot a 2d plot or first two CheSPI components
 if option is any other number: will interpret this value as so-called minAIC, which controls automatic re-referencing
-# default value is minAIC = 5.0. Lowering this value will favour re-referencing even with small offset corrections, increasing it will dis-favour re-referencing and only envoke it with high offsets. Setting minAIC very high to e.g. 999 will de facto disable re-referencing.
-flags: #TODO
+
+note: default value is minAIC = 5.0. Lowering this value will favour re-referencing even with small offset corrections, increasing it will dis-favour re-referencing and only envoke it with high offsets. Setting minAIC very high to e.g. 999 will de facto disable re-referencing.
 
 requirements: python must be version 2 with packages: numpy, scipy, matplotlib
 
