@@ -1196,7 +1196,8 @@ class Segments8(dict):
             previ=i
           p3=s3i
         if True: #handle end
-            self[s3i][previ]=sl
+            if not p3 in self:self[p3]={}
+            self[p3][previ]=sl
             self._ar[previ:previ+sl]=len(self.segm)
             self.segm.append([s3i,previ])
 
