@@ -7,15 +7,19 @@ Chemical shift Secondary structure Population Inference
 
 python command-line application
 
-usage: python_exe cheSPI4c.py ID [-p] [option] > logfile &
-if option is 2: will plot a 2d plot or first two CheSPI components
-if option is any other number: will interpret this value as so-called minAIC, which controls automatic re-referencing
+usage (Windows): python_exe cheSPI4c.py ID [option] > logfile &
+usage (Linux/MacOS): python cheSPI4c.py ID [option] > logfile &
 
-note: default value is minAIC = 5.0. Lowering this value will favour re-referencing even with small offset corrections, increasing it will dis-favour re-referencing and only envoke it with high offsets. Setting minAIC very high to e.g. 999 will de facto disable re-referencing.
+Arguments for cheSPI:
 
-requirements: python must be version 2 with packages: numpy, scipy, matplotlib
+ID specifies id for either (i) published BMRB id or (ii) a local provided NMR-STAR file id (version 2.1). For (i) the data will be downloaded automatically from the corresponding ftp site for the specified bmrid. For (ii) an NMR-STAR file (v2.1) must be placed in the running directory. The NMR-STAR file must contain chemical shifts and specify: “_Mol_residue_sequence", "assigned_chemical_shifts" and “sample_conditions” loop. When multiple conditions are part of the same NMR-STAR file only the first condition is used - to use any other condition, the user should make separate NMR-STAR files.
 
-Arguments for cheSPI: ID specifies id for either (i) published BMRB id or (ii) a local provided NMR-STAR file id (version 2.1). (i) The data will be downloaded automatically from the corresponding ftp site for the specified bmrid. (ii) An NMR-STAR file (v2.1) must be placed in the running directory. The NMR-STAR file must contain chemical shifts (SCSs) and specify: “_Mol_residue_sequence", "assigned_chemical_shifts" and sample_conditions loop
+CheSPI will first generate the expected random coil chemical shifts by use of the calculator POTENCI, using the sequence and conditions, and then check whether the bmrb entry requires re-referencing. If the user wishes to suppress re-referencing this can be done by the [option] argument, which the program uses as minAIC criterion. The default value for minAIC = 5.0. Lowering this value with [option] will favour re-referencing even with small offset corrections, increasing it will disfavour re-referencing and only invoke it with high offsets. Setting minAIC very high, e.g. [option] = 999 will de facto disable re-referencing.
+
+NB. In the special case that [option] = 2: CheSPI will plot a 2d plot or first two CheSPI components, rather than change minAIC.
+
+Subsequently, CheSPI will attempt an ss8 prediction using inference from correspondence between CheSPI components (derived from secondary chemical shifts) and structure class as well as inference from primary sequences. CheSPI will provide such predictions even with a limited number of assigned chemical shifts. However, for segments without any assigned chemical shifts, the predictions will be solely based on the primary sequence, and will consequently be of lower confidence.
+
 
 Output files:
 i) Secondary chemical shifts (SCSs), “shiftsID.txt”. Shift file has: residue number, residue type, atom type, assigned chemical shift, pentapeptide context, and SCS.
