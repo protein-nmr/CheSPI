@@ -1,6 +1,12 @@
 # CheSPI
 Chemical shift Secondary structure Population Inference
 
+Please find the publication here:
+CheSPI: chemical shift secondary structure population inference.
+Jakob Toudahl Nielsen and Frans A A Mulder, J. Biomol. NMR, 2021 Jul;75(6-7):273-291.
+
+https://doi.org/10.1007/s10858-021-00374-w
+
 1. Derives Principal components from chemical shifts to infer local structure and dynamics.
 2. Predicts secondary structure populations from chemical shifts.
 3. Predicts secondary structure DSSP 8-state classes from chemical shifts.
